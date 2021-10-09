@@ -12,3 +12,5 @@ class ApplicationController < ActionController::Base
     end
   end
 end
+
+#basic認証確認
