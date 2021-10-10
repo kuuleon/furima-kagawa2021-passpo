@@ -7,10 +7,10 @@
 | nickname              | string         | null: false                |
 | email                 | string         | null: false, unique: true  |
 | encrypted_password    | string         | null: false                |
-| first_name            | string         | null: false                |
-| family_name           | string         | null: false                |
-| first_name_kana       | string         | null: false                |
-| family_name_kana      | string         | null: false                |
+| first_name            | string         | null: false   全角          |
+| family_name           | string         | null: false   全角          |
+| first_name_kana       | string         | null: false   全角          |
+| family_name_kana      | string         | null: false   全角          |
 | birthday_year         | integer        | null: false                |
 | birthday_month        | integer        | null: false                |
 | birthday_day          | integer        | null: false                |
@@ -22,10 +22,10 @@ has_one :purchase
 
 ## items table
 
-| Column                | Type                              | Options    |
+| Column                | Type           | Options                        |
 |-----------------------|----------------|--------------------------------|
 | item_name             | string         | null: false                    |
-| image                 | ASで実装        ｜ null: false                    | (has_one_attached?)        
+| image                 | ASで実装        ｜ null: false                   |(has_one_attached?)        
 | explain               | text           | null: false                    |                   
 | item_price            | integer        | null: false                    |
 | user                  | reference      | null: false, foreign_key: true |
