@@ -16,7 +16,7 @@
 ### Association
 
 has_many :items
-has_one :purchase
+has_many :purchases
 
 
 ## items table
@@ -58,11 +58,12 @@ has_one :address
 | Column                | Type           | Options                        |
 |-----------------------|----------------|--------------------------------|
 | postal_code           | string         | null: false                    |
-| prefecture            | integer        | null: false                    |
+| prefecture_id         | integer        | null: false                    |
 | city                  | string         | null: false                    |
 | house_number          | string         | null: false                    |
 | building_number       | string         |                                |
-| tel_number            | string         | null: false,                   |
+| tel_number            | string         | null: false                    |
+| purchase              | references     | null: false, foreign_key: true |
 
 ### Association
 
