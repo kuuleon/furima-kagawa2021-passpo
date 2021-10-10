@@ -30,7 +30,7 @@ has_many :purchases
 | category_id           | integer        | null: false                    |
 | statement_id          | integer        | null: false                    |
 | load_id               | integer        | null: false                    |
-| area_id               | integer        | null: false                    |
+| prefecture_id         | integer        | null: false                    |
 | delivery_days_id      | integer        | null: false                    |
 
 ### Association
