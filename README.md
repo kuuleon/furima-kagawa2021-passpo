@@ -18,6 +18,7 @@
 has_many :items
 has_one :purchase
 
+
 ## items table
 
 | Column                | Type           | Options                        |
@@ -37,7 +38,22 @@ has_one :purchase
 belongs_to :user
 has_one :purchase
 
+
 ## purchases table
+
+| Column                | Type           | Options                        |
+|-----------------------|----------------|--------------------------------|
+| user                  | references     | null: false, foreign_key: true |
+| item                  | references     | null: false, foreign_key: true |
+
+### Association
+
+belongs_to :user
+belongs_to :item
+has_one :address
+
+
+## addresses table
 
 | Column                | Type           | Options                        |
 |-----------------------|----------------|--------------------------------|
@@ -47,10 +63,7 @@ has_one :purchase
 | house_number          | string         | null: false                    |
 | building_number       | string         |                                |
 | tel_number            | string         | null: false,                   |
-| user                  | reference      | null: false, foreign_key: true |
-| item                  | reference      | null: false, foreign_key: true |
 
 ### Association
 
-belongs_to :user
-belongs_to :item
+belongs_to :purchase
