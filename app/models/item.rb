@@ -3,20 +3,22 @@ class Item < ApplicationRecord
   belongs_to :genre
   belongs_to :user
   has_one :purchase
+  has_one_attached :image
 
+  validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :delivery_days_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :load_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :statement_id, numericality: { other_than: 1 , message: "can't be blank"}
 
-
-  has_one_attached :image #itemテーブルに画像ファイルを紐付け
-
-  with_options presence: true do
-    validates :image, :item_name, :explain, :user, :category_id, :statement_id, :load_id, :prefecture_id, :delivery_days_id
-  end
-
-  #価格は、¥300~¥9,999,999の間のみ且つ半角数値のみ保存可能
-  validates :item_price, presence: true, format: { with: /\A[0-9]+\z/, message: "Half-width number" }, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "Out of setting range" }
-
-  #ジャンルの選択が「--」の時は保存できないようにする
-  validates :genre_id, numericality: { other_than: 1, message: "can't be blank"} 
+  validates :item_price, numericality: { in: 300..9999999}
+  
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category
+  belongs_to :load
+  belongs_to :delivery_days
+  belongs_to :prefecture
+  belongs_to :statement
 
 end
 
