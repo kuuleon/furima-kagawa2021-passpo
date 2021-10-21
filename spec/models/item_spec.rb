@@ -11,13 +11,15 @@ RSpec.describe Item, type: :model do
       it '必須項目が全てあれば登録できること' do
         expect(@item).to be_valid
       end
-      it 'ログイン状態のユーザーのみ、商品出品ページへ遷移できること' do
-        @item = FactoryBot.create(:user)
-        expect(@item).to be_valid
-      end
     end
 
     context '出品ができない時' do
+      it 'ユーザー情報がない場合は登録できないこと' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist", "User can't be blank")
+      end
+
       it '商品画像を1枚つけることが必須であること' do
         @item.image = nil
         @item.valid?
@@ -37,9 +39,9 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリーの情報が必須であること' do
-        @item.category_id = ''
+        @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank", "Category can't be blank")
+        expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
       it '商品の状態についての情報が必須であること' do
@@ -72,8 +74,13 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Item price Half-width number', 'Item price Out of setting range')
       end
 
-      it '販売価格は、¥300~¥9,999,999の間のみ保存可能であること' do
+      it '販売価格が299以下の場合は保存できない' do
         @item.item_price = '100'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Item price Out of setting range')
+      end
+      it '販売価格が10,000,000以上の場合は保存できない' do
+        @item.item_price = '100000000'
         @item.valid?
         expect(@item.errors.full_messages).to include('Item price Out of setting range')
       end
