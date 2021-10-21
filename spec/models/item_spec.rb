@@ -17,7 +17,7 @@ RSpec.describe Item, type: :model do
       it 'ユーザー情報がない場合は登録できないこと' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist", "User can't be blank")
+        expect(@item.errors.full_messages).to include("User can't be blank")
       end
 
       it '商品画像を1枚つけることが必須であること' do
@@ -45,33 +45,33 @@ RSpec.describe Item, type: :model do
       end
 
       it '商品の状態についての情報が必須であること' do
-        @item.statement_id = ''
+        @item.statement_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Statement can't be blank", "Statement can't be blank")
+        expect(@item.errors.full_messages).to include("Statement can't be blank")
       end
 
       it '配送料の負担についての情報が必須であること' do
-        @item.load_id = ''
+        @item.load_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Load can't be blank", "Load can't be blank")
+        expect(@item.errors.full_messages).to include("Load can't be blank")
       end
 
       it '発送元の地域についての情報が必須であること' do
-        @item.prefecture_id = ''
+        @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank", "Prefecture can't be blank")
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
 
       it '発送までの日数についての情報が必須であること' do
-        @item.delivery_days_id = ''
+        @item.delivery_days_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery days can't be blank", "Delivery days can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery days can't be blank")
       end
 
       it '販売価格についての情報が必須であること' do
         @item.item_price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include('Item price Half-width number', 'Item price Out of setting range')
+        expect(@item.errors.full_messages).to include("Item price can't be blank")
       end
 
       it '販売価格が299以下の場合は保存できない' do
