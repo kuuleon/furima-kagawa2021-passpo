@@ -10,3 +10,5 @@ window.addEventListener('load', () => {
      addPofitDom.innerHTML = Math.round(priceInput.value - Math.round(priceInput.value * 0.1 ))
  })
 });
+
+

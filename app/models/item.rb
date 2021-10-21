@@ -12,7 +12,7 @@ class Item < ApplicationRecord
 
   #必須
   with_options presence: true do
-    validates :image, :item_name, :explain, :user
+    validates :image, :item_name, :explain, :user, :item_price
   end
 
   #必須、ジャンルの選択が「--」の時は保存できないようにする
