@@ -81,10 +81,9 @@ RSpec.describe Item, type: :model do
       end
 
       it '販売価格は半角数字のみ保存可能であること' do
-        @item_price = '１００００'
+        @item.item_price = '１００００'
         @item.valid?
-        binding.pry
-        expect(@item.errors.full_messages).to include()
+        expect(@item.errors.full_messages).to include("Item price Half-width number", "Item price Out of setting range")
       end
     end
   end
