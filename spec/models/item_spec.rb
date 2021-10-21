@@ -74,7 +74,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Item price Half-width number", "Item price Out of setting range")
       end
 
-      it '売価格は、¥300~¥9,999,999の間のみ保存可能であること' do
+      it '販売価格は、¥300~¥9,999,999の間のみ保存可能であること' do
         @item.item_price = '100'
         @item.valid?
         expect(@item.errors.full_messages).to include("Item price Out of setting range")
