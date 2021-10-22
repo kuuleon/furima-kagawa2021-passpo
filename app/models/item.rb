@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
-  #has_one :purchase
+  # has_one :purchase
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -25,7 +25,7 @@ class Item < ApplicationRecord
   end
 
   # 価格は、¥300~¥9,999,999の間のみ且つ半角数値のみ保存可能
-  validates :item_price, numericality: { only_integer: true} 
+  validates :item_price, numericality: { only_integer: true }
   validates :item_price, numericality: { with: /\A[0-9]+\z/, message: 'Half-width number' }
   validates :item_price,
             numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }
