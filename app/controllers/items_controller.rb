@@ -22,6 +22,9 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @item.destroy
     redirect_to root_path
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   private
