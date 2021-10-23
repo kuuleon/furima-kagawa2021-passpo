@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: :new
+  before_action :authenticate_user!, only: [:new, :edit, :update]
+  before_action :set_item, only: [:edit, :update]
+  before_action :move_to_index, only: [:edit, :update]
 
   def index
     @items = Item.order('created_at DESC')
@@ -18,8 +20,18 @@ class ItemsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item.id)
+    else
+      render :edit
+    end
+  end
+
   def show
-    @item = Item.find(params[:id])
   end
 
   private
@@ -27,5 +39,14 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:item_name, :explain, :category_id, :statement_id, :load_id, :prefecture_id, :delivery_days_id,
                                  :item_price, :image).merge(user_id: current_user.id)
+  end
+
+  def set_item
+    #データベースから商品情報を取得
+    @item = Item.find(params[:id])
+  end
+
+  def move_to_index
+    redirect_to root_path if current_user != @item.user
   end
 end
