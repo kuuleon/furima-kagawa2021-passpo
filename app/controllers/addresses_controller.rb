@@ -13,4 +13,11 @@ class AddressesController < ApplicationController
       render 'index'
     end
   end
+
+  private
+
+  def address_params
+    params.require(:address).permit(:postal_code, :prefecture_id, :city,:house_number, 
+                                    :building_number, :tel_number)
+  end
 end
