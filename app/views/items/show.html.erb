@@ -32,7 +32,9 @@
 
       <%# 商品が売れていない場合はこちらを表示しましょう %>
       <% else %>
+
       <%= link_to "購入画面に進む",  addresses_path(@item.id) ,class:"item-red-btn"%>
+
       <%# //商品が売れていない場合はこちらを表示しましょう %>
       <% end %>
     <% end %>
