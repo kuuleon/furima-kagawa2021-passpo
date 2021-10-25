@@ -4,7 +4,5 @@ Rails.application.routes.draw do
   root to: "items#index"
 
   resources :items, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-  resources :purchase do
-    resources :addresses, only: [:index, :create]
-  end
+  resources :purchase, only: [:index, :create]
 end

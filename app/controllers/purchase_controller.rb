@@ -1,5 +1,5 @@
-class AddressesController < ApplicationController
-
+class PurchaseController < ApplicationController
+  before_action :authenticate_user!, except: :index
 
   def index
     @address = Address.new
@@ -19,7 +19,7 @@ class AddressesController < ApplicationController
 
   def address_params
     params.require(:address).permit(:postal_code, :prefecture_id, :city,:house_number, 
-                                    :building_number, :tel_number)
+                                    :building_number, :tel_number).merge()
   end
 
   def pay_item
