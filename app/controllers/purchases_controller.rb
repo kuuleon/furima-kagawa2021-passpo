@@ -2,6 +2,7 @@ class PurchasesController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
+    @item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new
   end
 
@@ -18,8 +19,7 @@ class PurchasesController < ApplicationController
   private
 
   def purchase_params
-    params.require(:donation_address, :item).permit().merge(:postal_code, :prefecture_id, :city, :house_number, 
-    :building_number, :tel_number, user_id: current_user.id, item_id: item_id, item_name: item_name, item_price: item_price )
+    params.require(:donation_address).permit(:postal_code, :prefecture, :city, :house_number, :building_number, :tel_number).merge(user_id: current_user.id, item_id: item_id)
   end
 
   # def address_params
