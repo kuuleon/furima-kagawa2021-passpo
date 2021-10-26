@@ -6,8 +6,6 @@ class PurchaseAddress
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :item_price
-    validates :item_name
     validates :image
     validates :city
     validates :house_number

@@ -7,7 +7,6 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    binding.pry
     @purchase_address = PurchaseAddress.new(purchase_params)
     if @purchase_address.valid?
       @purchase_address.save
