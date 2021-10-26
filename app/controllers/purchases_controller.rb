@@ -12,7 +12,7 @@ class PurchasesController < ApplicationController
       @purchase_address.save
       redirect_to root_path
     else
-      render :new
+      render :index
     end
   end
 
