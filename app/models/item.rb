@@ -25,8 +25,9 @@ class Item < ApplicationRecord
   end
 
   # 価格は、¥300~¥9,999,999の間のみ且つ半角数値のみ保存可能
-  validates :item_price, numericality: { only_integer: true }
-  validates :item_price, numericality: { with: /\A[0-9]+\z/, message: 'Half-width number' }
+  #validates :item_price, numericality: { only_integer: true }
+  validates :item_price, numericality: { with: /\A[0-9]+\z/, message: 'Half-width number'}
   validates :item_price,
-            numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }
+            numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }
+  # validates :item_price, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
 end
