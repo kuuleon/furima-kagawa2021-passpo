@@ -6,7 +6,6 @@ class PurchaseAddress
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :image
     validates :city
     validates :house_number
     validates :tel_number, numericality: { only_integer: true }
