@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe PurchaseAddress, type: :model do
   before do
-    @item = FactoryBot.build(:item)
     @user = FactoryBot.build(:user)
+    @user.save
+    @item = FactoryBot.build(:item)
+    @item.save
     @purchase = FactoryBot.build(:purchase)
-    @purchase_address = FactoryBot.build(:purchase_address)#, user_id: @user.id, item_id: @item.id)
+    @purchase_address = FactoryBot.build(:purchase_address)#user_id: @user.id, item_id: @item.id)
   end
 
   describe '商品購入' do
@@ -79,4 +81,4 @@ end
 # 電話番号が必須であること。
 # 電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと（良い例：09012345678　良くない例：090-1234-5678）。
 # 郵便番号は、「3桁ハイフン4桁」の半角文字列のみ保存可能なこと（良い例：123-4567　良くない例：1234567）。
-bundle exec rspec spec/models/purchase_address_spec.rb
+#bundle exec rspec spec/models/purchase_address_spec.rb
