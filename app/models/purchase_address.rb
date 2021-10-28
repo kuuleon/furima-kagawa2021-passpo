@@ -8,9 +8,13 @@ class PurchaseAddress
     validates :item_id
     validates :city
     validates :house_number
-    validates :tel_number, numericality: { only_integer: true }
+    validates :tel_number, numericality: { with: /\A\d{10,11}\z/, message: 'is invalid. Input only number'}
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
   end
+
+  validates :tel_number, length: { minimum: 10, message: 'is too short' }
+  validates :tel_number, length: { maximum: 11, message: 'is too long' }
+
 
   # 必須、ジャンルの選択が「--」の時は保存できないようにする
   with_options presence: true, numericality: { other_than: 1, message: "can't be blank" } do
