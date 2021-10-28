@@ -14,6 +14,11 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'すべてのフォームの入力がされている' do
         expect(@purchase_address).to be_valid
       end
+      it "建物名が空の場合でも保存できる" do
+        @purchase_address.building_number = ''
+        @purchase_address.valid?
+        expect(@purchase_address).to be_valid
+      end
     end
 
     context '商品を購入できないとき' do
