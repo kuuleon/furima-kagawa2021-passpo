@@ -57,11 +57,22 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include('Tel number is not a number')
       end
-      it 'tel_numberが10桁以上11桁以内の半角数値のみでなければ保存できないこと' do
+      it 'tel_numberが半角のハイフンを含まない形式でないと保存できない' do
         @purchase_address.tel_number = '090-1234-5678'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Tel number is not a number')
+        expect(@purchase_address.errors.full_messages).to include('Tel number is invalid. Input only number')
       end
+      it 'tel_numberが9桁以下だと保存できないこと' do
+        @purchase_address.tel_number = '123456789'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("tel number is too short")
+      end
+      it 'tel_numberが12桁以上だと保存できないこと' do
+        @purchase_address.tel_number = '123456789012'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("tel number is too long")
+      end
+
       it 'user_idが空では登録できないこと' do
         @purchase_address.user_id = nil
         @purchase_address.valid?
