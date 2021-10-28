@@ -22,16 +22,12 @@ class ItemsController < ApplicationController
 
   def destroy
     @item = Item.find(params[:id])
-    if @item.user_id == current_user.id
-      @item.destroy
-    end
+    @item.destroy if @item.user_id == current_user.id
     redirect_to root_path
   end
 
   def edit
-    if @item.purchase.present?
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.purchase.present?
   end
 
   def update
@@ -42,10 +38,8 @@ class ItemsController < ApplicationController
     end
   end
 
-
   def show
   end
-
 
   private
 
@@ -55,7 +49,7 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    #データベースから商品情報を取得
+    # データベースから商品情報を取得
     @item = Item.find(params[:id])
   end
 

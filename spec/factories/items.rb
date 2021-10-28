@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
     item_name { Faker::Lorem.sentence }
-    #image { Faker::Lorem.sentence }
+    # image { Faker::Lorem.sentence }
     explain { Faker::Lorem.sentence }
     association :user
     category_id           { 2 }

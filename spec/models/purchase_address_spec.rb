@@ -6,7 +6,7 @@ RSpec.describe PurchaseAddress, type: :model do
     @item = FactoryBot.create(:item)
     @purchase = FactoryBot.build(:purchase)
     @purchase_address = FactoryBot.build(:purchase_address, user_id: @user.id, item_id: @item.id)
-    sleep 0.1 
+    sleep 0.1
   end
 
   describe '商品購入' do
@@ -25,7 +25,7 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'postal_code が「3桁ハイフン4桁」の半角文字列でないと保存できないこと' do
         @purchase_address.postal_code = '1234567'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@purchase_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it 'prefecture_idが空では保存できないこと' do
         @purchase_address.prefecture_id = ''
@@ -50,19 +50,19 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'tel_numberが英数混合では保存できないこと' do
         @purchase_address.tel_number = '００００００００aaa'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Tel number is not a number")
+        expect(@purchase_address.errors.full_messages).to include('Tel number is not a number')
       end
       it 'tel_numberが10桁以上11桁以内の半角数値のみでなければ保存できないこと' do
         @purchase_address.tel_number = '090-1234-5678'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Tel number is not a number")
+        expect(@purchase_address.errors.full_messages).to include('Tel number is not a number')
       end
-      it "user_idが空では登録できないこと" do
+      it 'user_idが空では登録できないこと' do
         @purchase_address.user_id = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("User can't be blank")
       end
-      it "item_idが空では登録できないこと" do
+      it 'item_idが空では登録できないこと' do
         @purchase_address.item_id = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
@@ -71,7 +71,7 @@ RSpec.describe PurchaseAddress, type: :model do
   end
 end
 
-#ok
+# ok
 # 配送先の住所情報も購入の都度入力させること。
 # 郵便番号が必須であること。
 # 都道府県が必須であること。
@@ -80,4 +80,4 @@ end
 # 電話番号が必須であること。
 # 電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと（良い例：09012345678　良くない例：090-1234-5678）。
 # 郵便番号は、「3桁ハイフン4桁」の半角文字列のみ保存可能なこと（良い例：123-4567　良くない例：1234567）。
-#bundle exec rspec spec/models/purchase_address_spec.rb
+# bundle exec rspec spec/models/purchase_address_spec.rb

@@ -9,7 +9,6 @@ class Item < ApplicationRecord
   belongs_to :delivery_days
   belongs_to :prefecture
   belongs_to :statement
-  
 
   # 必須
   with_options presence: true do
