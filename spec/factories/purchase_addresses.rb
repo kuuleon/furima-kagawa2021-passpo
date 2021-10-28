@@ -5,7 +5,7 @@ FactoryBot.define do
     city { "2" }
     house_number { '1-2' }
     tel_number { '09012345678' }   
-     
+  
   end
 end
 
