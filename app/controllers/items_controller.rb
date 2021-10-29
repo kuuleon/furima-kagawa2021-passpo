@@ -13,10 +13,10 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if @item.save  # 出品情報の保存に成功した場合、
-      redirect_to root_path # ルートパスに戻る
+    if @item.save
+      redirect_to root_path
     else
-      render :new # データが保存されなかったときは新規投稿ページへ戻る(newアクションのnew.html.erbを表示する)
+      render :new
     end
   end
 
@@ -49,7 +49,6 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    # データベースから商品情報を取得
     @item = Item.find(params[:id])
   end
 

@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # basic認証確認
   def basic_auth
     if Rails.env.production?
       authenticate_or_request_with_http_basic do |username, password|
@@ -13,7 +12,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # ストロングパラメーター
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up,
                                       keys: [:nickname, :first_name, :family_name, :family_name_kana, :first_name_kana,
