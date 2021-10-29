@@ -11,7 +11,7 @@ RSpec.describe PurchaseAddress, type: :model do
 
   describe '商品購入' do
     context '購入できるとき' do
-      it 'すべてのフォームの入力がされている' do
+      it 'すべてのフォームの入力とトークン保存されている' do
         expect(@purchase_address).to be_valid
       end
       it "建物名が空の場合でも保存できる" do
@@ -82,6 +82,12 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.item_id = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it "tokenが空では登録できないこと" do
+        @purchase_address.token = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
