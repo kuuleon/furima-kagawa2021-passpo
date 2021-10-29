@@ -1,11 +1,12 @@
 class PurchaseAddress
   include ActiveModel::Model
-  attr_accessor :postal_code, :prefecture_id, :city, :house_number, :building_number, :tel_number, :user_id, :item_id
+  attr_accessor :postal_code, :prefecture_id, :city, :house_number, :building_number, :tel_number, :user_id, :item_id, :token
 
-  # 必須
+  #必須
   with_options presence: true do
     validates :user_id
     validates :item_id
+    validates :token
     validates :city
     validates :house_number
     validates :tel_number, numericality: { with: /\A\d{10,11}\z/, message: 'is invalid. Input only number'}
@@ -23,7 +24,7 @@ class PurchaseAddress
 
   def save
     # 購入情報を保存し、変数purchaseに代入する
-    purchase = Purchase.create(user_id: user_id, item_id: item_id)
+    purchase = Purchase.create(user_id: user_id, item_id: item_id, token: token)
     # 住所を保存する
     # purchase_idには、変数purchaseのidと指定する
     Address.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, house_number: house_number,
