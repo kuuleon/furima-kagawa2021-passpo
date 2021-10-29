@@ -52,11 +52,6 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Tel number can't be blank")
       end
-      #it 'tel_numberが英数混合では保存できないこと' do
-        #@purchase_address.tel_number = '００００００００aaa'
-        #@purchase_address.valid?
-        #expect(@purchase_address.errors.full_messages).to include('Tel number is not a number')
-      #end
       it 'tel_numberが半角のハイフンを含まない形式でないと保存できない' do
         @purchase_address.tel_number = '090-1234-5678'
         @purchase_address.valid?
