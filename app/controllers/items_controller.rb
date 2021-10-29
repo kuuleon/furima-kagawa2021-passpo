@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :create]
-  before_action :set_item, only: [:edit, :update, :show]
+  before_action :set_item, only: [:edit, :update, :show, :destroy]
   before_action :move_to_index, only: [:edit, :update]
 
   def index
@@ -12,23 +12,21 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
-    if @item.save  # 出品情報の保存に成功した場合、
-      redirect_to root_path # ルートパスに戻る
+    if @item.save
+      redirect_to root_path
     else
-      render :new # データが保存されなかったときは新規投稿ページへ戻る(newアクションのnew.html.erbを表示する)
+      render :new
     end
   end
 
   def destroy
     @item = Item.find(params[:id])
-    if @item.user_id == current_user.id
-      @item.destroy
-    end
+    @item.destroy if @item.user_id == current_user.id
     redirect_to root_path
   end
 
   def edit
+    redirect_to root_path if @item.purchase.present?
   end
 
   def update
@@ -38,7 +36,6 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
-
 
   def show
   end
@@ -51,7 +48,6 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    #データベースから商品情報を取得
     @item = Item.find(params[:id])
   end
 
