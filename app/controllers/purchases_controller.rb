@@ -1,6 +1,6 @@
 class PurchasesController < ApplicationController
   before_action :set_item, only: [:index, :create]
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index, :create]
 
   def index
     if current_user.id == @item.user_id
@@ -13,7 +13,6 @@ class PurchasesController < ApplicationController
   end
 
   def create
-
     @purchase_address = PurchaseAddress.new(purchase_params)
     if @purchase_address.valid?
       pay_item
