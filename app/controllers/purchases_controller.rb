@@ -13,6 +13,12 @@ class PurchasesController < ApplicationController
   end
 
   def create
+    if current_user.id == @item.user_id
+      return redirect_to root_path
+    end
+    if @item.purchase.present?
+      return redirect_to root_path
+    end
     @purchase_address = PurchaseAddress.new(purchase_params)
     if @purchase_address.valid?
       pay_item
